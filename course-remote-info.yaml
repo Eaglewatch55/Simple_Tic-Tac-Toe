@@ -3,7 +3,7 @@ hyperskill_project:
   ide_files: https://stepik.org/media/attachments/lesson/239550/additional_files.json
   is_template_based: false
   use_ide: true
-update_date: "Sat, 01 Apr 2023 16:28:14 UTC"
+update_date: "Fri, 14 Apr 2023 00:56:03 UTC"
 stages:
 - id: 399
   step: 6503
@@ -16,10 +16,10 @@ stages:
   is_completed: true
 - id: 402
   step: 6506
-  is_completed: false
+  is_completed: true
 - id: 403
   step: 6507
-  is_completed: false
+  is_completed: true
 topics:
   0:
   - title: Introduction to Python
@@ -28,17 +28,29 @@ topics:
     theory_id: 5208
   - title: Multi-line programs
     theory_id: 5233
-  1:
   - title: PEP 8
     theory_id: 5879
   - title: Comments
     theory_id: 6081
-  - title: Taking input
-    theory_id: 5913
+  - title: Load module
+    theory_id: 6019
+  - title: Introduction to Python shell
+    theory_id: 8133
+  - title: Experiments with Python shell
+    theory_id: 8238
   - title: Basic data types
     theory_id: 5852
   - title: Variables
     theory_id: 5859
+  - title: Invoking a function
+    theory_id: 5891
+  - title: Integer arithmetic
+    theory_id: 5865
+  - title: Declaring a function
+    theory_id: 5900
+  1:
+  - title: Taking input
+    theory_id: 5913
   - title: List
     theory_id: 5979
   - title: Indexes
@@ -46,14 +58,8 @@ topics:
   - title: Slicing
     theory_id: 6177
   2:
-  - title: IDE
-    theory_id: 10996
-  - title: Introduction to Operating systems
-    theory_id: 9704
-  - title: Command line overview
-    theory_id: 8977
-  - title: Parameters and Options
-    theory_id: 9746
+  - title: Computer programming
+    theory_id: 8739
   - title: Naming variables
     theory_id: 5885
   - title: Program with numbers
@@ -62,32 +68,20 @@ topics:
     theory_id: 5953
   - title: Else statement
     theory_id: 5932
-  - title: Load module
-    theory_id: 6019
-  - title: Create module
-    theory_id: 6057
-  - title: Packages
-    theory_id: 6384
-  - title: Pip
-    theory_id: 6230
-  - title: Virtual Environment
-    theory_id: 13923
   - title: For loop
     theory_id: 6065
   - title: Elif statement
     theory_id: 5926
-  - title: PyCharm basics
-    theory_id: 6193
-  - title: Running Python applications in PyCharm
-    theory_id: 19153
-  - title: Debugging Python applications in PyCharm
-    theory_id: 19163
+  - title: What is a bug
+    theory_id: 5504
+  - title: Program execution
+    theory_id: 6047
+  - title: Errors
+    theory_id: 6052
+  - title: Debugging in shell
+    theory_id: 8244
   - title: Avoiding bad comments
     theory_id: 6440
-  - title: Invoking a function
-    theory_id: 5891
-  - title: Integer arithmetic
-    theory_id: 5865
   - title: Boolean logic
     theory_id: 6025
   - title: Comparisons
@@ -99,20 +93,12 @@ topics:
   3:
   - title: While loop
     theory_id: 5940
-  - title: Program execution
-    theory_id: 6047
-  - title: Errors
-    theory_id: 6052
   - title: Exceptions
     theory_id: 6042
   - title: Built-in exceptions
     theory_id: 11680
   - title: Exception handling
     theory_id: 6270
-  - title: Linters and helpers
-    theory_id: 18652
-  - title: Declaring a function
-    theory_id: 5900
   - title: Scopes
     theory_id: 6322
   - title: Quotes and multi-line strings

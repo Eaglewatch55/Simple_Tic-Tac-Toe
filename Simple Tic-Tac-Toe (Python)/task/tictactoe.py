@@ -1,102 +1,122 @@
-def matrix_generator(input_string):
-    dict_ = {}
+class Matrix:
+    def __init__(self):
+        self.line0 = [" ", " ", " "]
+        self.line1 = [" ", " ", " "]
+        self.line2 = [" ", " ", " "]
+        self.mtx = [self.line0, self.line1, self.line2]
 
-    mat = [[input_string[0], input_string[1], input_string[2]],
-              [input_string[3], input_string[4], input_string[5]],
-              [input_string[6], input_string[7], input_string[8]]]
+    def __str__(self):
+        to_print = "---------\n"
 
-    for char_ in input_string:
-        if char_ not in accepted_char:
-            raise ValueError(f"Character '{char_}' not accepted")
+        for line in self.mtx:
+            to_print += f"| {line[0]} {line[1]} {line[2]} |\n"
 
-        if char_ not in dict_.keys():
-            dict_[char_] = 1
+        to_print += "---------"
 
-        else:
-            dict_[char_] += 1
+        return to_print
 
-    return mat, dict_
+    def get_value(self, coordinates: list):
+        return self.mtx[coordinates[0]][coordinates[1]]
+
+    def set_value(self, coordinates: list, player):
+        self.mtx[coordinates[0]][coordinates[1]] = player
+
+    def all_filled(self):
+
+        for line in self.mtx:
+            if " " in line:
+                return False
+
+        return True
 
 
-def print_matrix(temp_matrix):
-    print("---------")
-    print(f"| {temp_matrix[0][0]} {temp_matrix[0][1]} {temp_matrix[0][2]} |")
-    print(f"| {temp_matrix[1][0]} {temp_matrix[1][1]} {temp_matrix[1][2]} |")
-    print(f"| {temp_matrix[2][0]} {temp_matrix[2][1]} {temp_matrix[2][2]} |")
-    print("---------")
-
-
-def update_matrix(temp_matrix, cord):
-    temp_matrix[cord[0]][cord[1]] = "X"
-    return temp_matrix
-
-input_ = input()
-accepted_char = ("X", "O", "_")
-
-matrix, dict_count = matrix_generator(input_)
-
-print_matrix(matrix)
-
-while True:
-    input_ = input()
+def coordinate_validation(coordinate):
     coordinates = []
-
     try:
-        for char_ in input_:
+        for char_ in coordinate:
             if char_ == " ":
                 continue
             else:
                 coordinates.append(int(char_) - 1)
     except ValueError:
         print("You should enter numbers!")
-        continue
+        return None
 
     valid_num = [0, 1, 2]
 
     if coordinates[0] not in valid_num or coordinates[1] not in valid_num:
         print("Coordinates should be from 1 to 3!")
-        continue
+        return None
 
-    if matrix[coordinates[0]][coordinates[1]] != "_":
-        print("This cell is occupied! Choose another one!")
-        continue
+    return coordinates
 
-    break
 
-matrix = update_matrix(matrix, coordinates)
-print_matrix(matrix)
+# def matrix_generator(input_string):
+#     """Creates the matrix and counts each character"""
+#
+#     mat = [[input_string[0], input_string[1], input_string[2]],
+#               [input_string[3], input_string[4], input_string[5]],
+#               [input_string[6], input_string[7], input_string[8]]]
+#
+#     for char_ in input_string:
+#         if char_ not in accepted_char:
+#             raise ValueError(f"Character '{char_}' not accepted")
+#
+#     return mat
+
+
 
 # VALIDATION AND STATUS CHECKER
+def winner_checker(mat: Matrix, player):
+    winner = []
+    cond1 = cond2 = False
 
-# if abs(dict_count["X"] - dict_count["O"]) >= 2:
-#     print("Impossible")
-#     exit()
-#
-# winner = []
-#
-# for i in range(3):
-#     if matrix[i][0] == matrix[i][1] and matrix[i][0] == matrix[i][2]:
-#         winner.append(matrix[i][0])
-#
-#     if matrix[0][i] == matrix[1][i] and matrix[0][i] == matrix[2][i]:
-#         winner.append(matrix[0][i])
-#
-# if matrix[0][0] == matrix[1][1] and matrix[0][0] == matrix[2][2]:
-#     winner.append(matrix[i][0])
-#
-# if matrix[0][2] == matrix[1][1] and matrix[0][2] == matrix[0][2]:
-#     winner.append(matrix[i][0])
-#
-#
-# if len(winner) == 1:
-#     print(f"{winner[0]} wins")
-#     exit()
-# elif len(winner) > 1:
-#     print("Impossible")
-#     exit()
-#
-# if "_" in dict_count.keys():
-#     print("Game not finished")
-# else:
-#     print("Draw")
+    for i in range(3):
+
+        if player == mat.get_value([i, 0]) == mat.get_value([i, 1]) == mat.get_value([i, 2]):
+            cond1 = True
+            break
+
+        if player == mat.get_value([0, i]) == mat.get_value([1, i]) == mat.get_value([2, i]):
+            cond2 = True
+            break
+
+    cond3 = player == mat.get_value([0, 0]) == mat.get_value([1, 1]) == mat.get_value([2, 2])
+    cond4 = player == mat.get_value([0, 2]) == mat.get_value([1, 1]) == mat.get_value([2, 0])
+
+    return any([cond1, cond2, cond3, cond4])
+
+
+# MAIN EXECUTION
+if __name__ == "__main__":
+
+    matrix = Matrix()
+    counter = 0
+    players = {0: "X", 1: "O"}
+    print(matrix)
+
+    while True:
+        coord = None
+        player = players[counter % 2]
+
+        while coord is None:
+            input_ = input()
+            coord = coordinate_validation(input_)
+
+        if matrix.get_value(coord) == " ":
+            matrix.set_value(coord, player)
+        else:
+            print("This cell is occupied! Choose another one!")
+            continue
+
+        print(matrix)
+
+        if winner_checker(matrix, player):
+            print(f"{player} wins")
+            exit()
+        if matrix.all_filled():
+            print("Draw")
+            exit()
+
+        counter += 1
 
